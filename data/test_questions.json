@@ -1,0 +1,20 @@
+[
+  {"question": "How many vacation days do I get each year?", "expected_policy": "Vacation Policy", "type": "direct"},
+  {"question": "Can I work from home on some days?", "expected_policy": "Remote Work Policy", "type": "paraphrased"},
+  {"question": "I want to spend three weeks working from Spain. Is that OK?", "expected_policy": "Work From Abroad Policy", "type": "paraphrased"},
+  {"question": "Do I need permission before buying a $800 monitor?", "expected_policy": "Expense Approval Policy", "type": "paraphrased"},
+  {"question": "How long is the probation period for new hires?", "expected_policy": "Probation Period Policy", "type": "direct"},
+  {"question": "My grandmother passed away. How much time off can I take?", "expected_policy": "Bereavement Leave Policy", "type": "paraphrased"},
+  {"question": "We are having a baby. How much paid leave can I get?", "expected_policy": "Parental Leave Policy", "type": "paraphrased"},
+  {"question": "How often do I have to change my password?", "expected_policy": "Password Policy", "type": "direct"},
+  {"question": "I think I clicked a phishing link. What should I do?", "expected_policy": "Security Incident Policy", "type": "paraphrased"},
+  {"question": "A journalist emailed me asking about our new product. Can I reply?", "expected_policy": "Media Contact Policy", "type": "paraphrased"},
+  {"question": "When do I need to hand in receipts after a business trip?", "expected_policy": "Travel Reimbursement Policy", "type": "direct"},
+  {"question": "Can I install Spotify on my work laptop?", "expected_policy": "Software Installation Policy", "type": "paraphrased"},
+  {"question": "How many sick days do I get per year?", "expected_policy": "Sick Leave Policy", "type": "trap", "note": "The policy says sick leave accrues monthly but gives no number. Any specific number is unsupported."},
+  {"question": "What is the maximum hotel price per night on business travel?", "expected_policy": null, "type": "trap", "note": "No policy sets a hotel limit. The travel policy only covers receipts."},
+  {"question": "Can I bring my dog to the office?", "expected_policy": null, "type": "out_of_scope"},
+  {"question": "What is the company's pension contribution?", "expected_policy": null, "type": "out_of_scope"},
+  {"question": "Is there free lunch in the canteen?", "expected_policy": null, "type": "out_of_scope"},
+  {"question": "Can I smoke on the company premises?", "expected_policy": null, "type": "out_of_scope"}
+]

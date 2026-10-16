@@ -1,0 +1,1113 @@
+{
+  "generated_at": "2026-10-16T17:58:56+00:00",
+  "chat_model": "gemini-3.5-flash-lite",
+  "embed_model": "gemini-embedding-001",
+  "policy_count": 98,
+  "summary": {
+    "rules": {
+      "name": "Rules-based search",
+      "avg_time_ms": 0.5,
+      "avg_tokens": 0,
+      "policy_accuracy": 0.611,
+      "unsupported_rate": 0.333
+    },
+    "llm_full": {
+      "name": "LLM without vector index",
+      "avg_time_ms": 8668.3,
+      "avg_tokens": 2223,
+      "policy_accuracy": 1.0,
+      "unsupported_rate": 0.111
+    },
+    "llm_rag": {
+      "name": "LLM with vector index",
+      "avg_time_ms": 6787.9,
+      "avg_tokens": 207,
+      "policy_accuracy": 1.0,
+      "unsupported_rate": 0.0
+    }
+  },
+  "questions": [
+    {
+      "question": "How many vacation days do I get each year?",
+      "expected_policy": "Vacation Policy",
+      "type": "direct",
+      "results": {
+        "rules": {
+          "answer": "Employees receive 15 vacation days per year. Unused days may roll over.",
+          "policy": "Vacation Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.1,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database explicitly states that employees receive 15 vacation days per year and unused days may roll over."
+        },
+        "llm_full": {
+          "answer": "Employees receive 15 vacation days per year, and unused days may roll over.",
+          "policy": "Vacation Policy",
+          "tokens": {
+            "input": 2197,
+            "output": 29,
+            "total": 2226
+          },
+          "time_ms": 5846.1,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The vacation policy states that employees receive 15 vacation days per year and unused days may roll over."
+        },
+        "llm_rag": {
+          "answer": "Employees receive 15 vacation days per year.",
+          "policy": "Vacation Policy",
+          "tokens": {
+            "input": 182,
+            "output": 22,
+            "total": 204
+          },
+          "retrieved": [
+            {
+              "title": "Vacation Policy",
+              "similarity": 0.753
+            },
+            {
+              "title": "Holiday Schedule Policy",
+              "similarity": 0.654
+            },
+            {
+              "title": "Sick Leave Policy",
+              "similarity": 0.648
+            }
+          ],
+          "time_ms": 6075.1,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states that employees receive 15 vacation days per year."
+        }
+      }
+    },
+    {
+      "question": "Can I work from home on some days?",
+      "expected_policy": "Remote Work Policy",
+      "type": "paraphrased",
+      "results": {
+        "rules": {
+          "answer": "Employees may work remotely up to three days per week with manager approval.",
+          "policy": "Remote Work Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.4,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states that employees may work remotely up to three days per week with manager approval."
+        },
+        "llm_full": {
+          "answer": "Employees may work remotely up to three days per week with manager approval.",
+          "policy": "Remote Work Policy",
+          "tokens": {
+            "input": 2196,
+            "output": 26,
+            "total": 2222
+          },
+          "time_ms": 6210.3,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database contains the exact rule that employees may work remotely up to three days per week with manager approval."
+        },
+        "llm_rag": {
+          "answer": "Employees may work remotely up to three days per week with manager approval.",
+          "policy": "Remote Work Policy",
+          "tokens": {
+            "input": 177,
+            "output": 26,
+            "total": 203
+          },
+          "retrieved": [
+            {
+              "title": "Remote Work Policy",
+              "similarity": 0.739
+            },
+            {
+              "title": "Flexible Hours Policy",
+              "similarity": 0.703
+            },
+            {
+              "title": "Home Office Equipment Policy",
+              "similarity": 0.669
+            }
+          ],
+          "time_ms": 7081.9,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states that employees may work remotely up to three days per week with manager approval."
+        }
+      }
+    },
+    {
+      "question": "I want to spend three weeks working from Spain. Is that OK?",
+      "expected_policy": "Work From Abroad Policy",
+      "type": "paraphrased",
+      "results": {
+        "rules": {
+          "answer": "Employees may work remotely up to three days per week with manager approval.",
+          "policy": "Remote Work Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.4,
+          "policy_correct": false,
+          "supported": false,
+          "judge_reason": "The answer cites the Remote Work Policy instead of the Work From Abroad Policy which covers working from another country."
+        },
+        "llm_full": {
+          "answer": "Employees may work abroad for up to 30 days with approval.",
+          "policy": "Work From Abroad Policy",
+          "tokens": {
+            "input": 2201,
+            "output": 34,
+            "total": 2235
+          },
+          "time_ms": 12807.2,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states that employees may work abroad for up to 30 days with approval."
+        },
+        "llm_rag": {
+          "answer": "Employees may work abroad for up to 30 days with approval.",
+          "policy": "Work From Abroad Policy",
+          "tokens": {
+            "input": 187,
+            "output": 27,
+            "total": 214
+          },
+          "retrieved": [
+            {
+              "title": "Work From Abroad Policy",
+              "similarity": 0.739
+            },
+            {
+              "title": "Remote Work Policy",
+              "similarity": 0.674
+            },
+            {
+              "title": "Flexible Hours Policy",
+              "similarity": 0.665
+            }
+          ],
+          "time_ms": 7341.8,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states that employees may work abroad for up to 30 days with approval."
+        }
+      }
+    },
+    {
+      "question": "Do I need permission before buying a $800 monitor?",
+      "expected_policy": "Expense Approval Policy",
+      "type": "paraphrased",
+      "results": {
+        "rules": {
+          "answer": "Products must pass quality checks before release.",
+          "policy": "Quality Assurance Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.5,
+          "policy_correct": false,
+          "supported": false,
+          "judge_reason": "The answer discusses quality checks for products instead of addressing whether expenses over $500 require prior approval."
+        },
+        "llm_full": {
+          "answer": "All expenses over $500 require prior approval from Finance.",
+          "policy": "Expense Approval Policy",
+          "tokens": {
+            "input": 2200,
+            "output": 25,
+            "total": 2225
+          },
+          "time_ms": 6910.8,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The policy database states that all expenses over $500 require prior approval from Finance."
+        },
+        "llm_rag": {
+          "answer": "Yes, all expenses over $500 require prior approval from Finance.",
+          "policy": "Expense Approval Policy",
+          "tokens": {
+            "input": 180,
+            "output": 27,
+            "total": 207
+          },
+          "retrieved": [
+            {
+              "title": "Expense Approval Policy",
+              "similarity": 0.707
+            },
+            {
+              "title": "Procurement Policy",
+              "similarity": 0.687
+            },
+            {
+              "title": "Conference Attendance Policy",
+              "similarity": 0.665
+            }
+          ],
+          "time_ms": 7886.2,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The policy database states that all expenses over $500 require prior approval from Finance."
+        }
+      }
+    },
+    {
+      "question": "How long is the probation period for new hires?",
+      "expected_policy": "Probation Period Policy",
+      "type": "direct",
+      "results": {
+        "rules": {
+          "answer": "New hires are subject to a 90-day probation period.",
+          "policy": "Probation Period Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 1.2,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database explicitly states that new hires are subject to a 90-day probation period."
+        },
+        "llm_full": {
+          "answer": "New hires are subject to a 90-day probation period.",
+          "policy": "Probation Period Policy",
+          "tokens": {
+            "input": 2197,
+            "output": 27,
+            "total": 2224
+          },
+          "time_ms": 7882.1,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database explicitly states that new hires are subject to a 90-day probation period."
+        },
+        "llm_rag": {
+          "answer": "New hires are subject to a 90-day probation period.",
+          "policy": "Probation Period Policy",
+          "tokens": {
+            "input": 178,
+            "output": 27,
+            "total": 205
+          },
+          "retrieved": [
+            {
+              "title": "Probation Period Policy",
+              "similarity": 0.764
+            },
+            {
+              "title": "Onboarding Policy",
+              "similarity": 0.657
+            },
+            {
+              "title": "Background Check Policy",
+              "similarity": 0.642
+            }
+          ],
+          "time_ms": 7107.3,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database explicitly states that new hires are subject to a 90-day probation period."
+        }
+      }
+    },
+    {
+      "question": "My grandmother passed away. How much time off can I take?",
+      "expected_policy": "Bereavement Leave Policy",
+      "type": "paraphrased",
+      "results": {
+        "rules": {
+          "answer": "Meetings should start on time and follow an agenda.",
+          "policy": "Meeting Etiquette Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.4,
+          "policy_correct": false,
+          "supported": false,
+          "judge_reason": "The answer discusses meeting etiquette instead of the bereavement leave policy."
+        },
+        "llm_full": {
+          "answer": "Employees may take up to 5 days of bereavement leave upon the passing of a family member.",
+          "policy": "Bereavement Leave Policy",
+          "tokens": {
+            "input": 2200,
+            "output": 32,
+            "total": 2232
+          },
+          "time_ms": 10679.4,
+          "policy_correct": true,
+          "supported": false,
+          "judge_reason": "The policy database states employees may take up to 5 days of bereavement leave, but does not specify it is upon the passing of a family member."
+        },
+        "llm_rag": {
+          "answer": "Employees may take up to 5 days of bereavement leave.",
+          "policy": "Bereavement Leave Policy",
+          "tokens": {
+            "input": 189,
+            "output": 25,
+            "total": 214
+          },
+          "retrieved": [
+            {
+              "title": "Bereavement Leave Policy",
+              "similarity": 0.724
+            },
+            {
+              "title": "Sick Leave Policy",
+              "similarity": 0.649
+            },
+            {
+              "title": "Vacation Policy",
+              "similarity": 0.639
+            }
+          ],
+          "time_ms": 7258.6,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database explicitly states that employees may take up to 5 days of bereavement leave."
+        }
+      }
+    },
+    {
+      "question": "We are having a baby. How much paid leave can I get?",
+      "expected_policy": "Parental Leave Policy",
+      "type": "paraphrased",
+      "results": {
+        "rules": {
+          "answer": "Eligible employees may take up to 12 weeks of paid parental leave.",
+          "policy": "Parental Leave Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.4,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states that eligible employees may take up to 12 weeks of paid parental leave."
+        },
+        "llm_full": {
+          "answer": "Eligible employees may take up to 12 weeks of paid parental leave.",
+          "policy": "Parental Leave Policy",
+          "tokens": {
+            "input": 2201,
+            "output": 29,
+            "total": 2230
+          },
+          "time_ms": 5278.8,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The answer directly matches the Parental Leave Policy stating that eligible employees may take up to 12 weeks of paid parental leave."
+        },
+        "llm_rag": {
+          "answer": "Eligible employees may take up to 12 weeks of paid parental leave.",
+          "policy": "Parental Leave Policy",
+          "tokens": {
+            "input": 193,
+            "output": 36,
+            "total": 229
+          },
+          "retrieved": [
+            {
+              "title": "Parental Leave Policy",
+              "similarity": 0.695
+            },
+            {
+              "title": "Vacation Policy",
+              "similarity": 0.619
+            },
+            {
+              "title": "Sick Leave Policy",
+              "similarity": 0.615
+            }
+          ],
+          "time_ms": 5200.8,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states under Parental Leave Policy that eligible employees may take up to 12 weeks of paid parental leave."
+        }
+      }
+    },
+    {
+      "question": "How often do I have to change my password?",
+      "expected_policy": "Password Policy",
+      "type": "direct",
+      "results": {
+        "rules": {
+          "answer": "Passwords must be changed every 90 days and meet complexity requirements.",
+          "policy": "Password Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.7,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states that passwords must be changed every 90 days and meet complexity requirements."
+        },
+        "llm_full": {
+          "answer": "Passwords must be changed every 90 days and meet complexity requirements.",
+          "policy": "Password Policy",
+          "tokens": {
+            "input": 2197,
+            "output": 32,
+            "total": 2229
+          },
+          "time_ms": 7220.1,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states that passwords must be changed every 90 days and meet complexity requirements."
+        },
+        "llm_rag": {
+          "answer": "Passwords must be changed every 90 days and meet complexity requirements.",
+          "policy": "Password Policy",
+          "tokens": {
+            "input": 177,
+            "output": 25,
+            "total": 202
+          },
+          "retrieved": [
+            {
+              "title": "Password Policy",
+              "similarity": 0.729
+            },
+            {
+              "title": "Security Incident Policy",
+              "similarity": 0.615
+            },
+            {
+              "title": "Cybersecurity Awareness Policy",
+              "similarity": 0.609
+            }
+          ],
+          "time_ms": 5228.1,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database explicitly states that passwords must be changed every 90 days and meet complexity requirements."
+        }
+      }
+    },
+    {
+      "question": "I think I clicked a phishing link. What should I do?",
+      "expected_policy": "Security Incident Policy",
+      "type": "paraphrased",
+      "results": {
+        "rules": {
+          "answer": "Security incidents must be reported immediately.",
+          "policy": "Security Incident Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.4,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states under Security Incident Policy that security incidents must be reported immediately."
+        },
+        "llm_full": {
+          "answer": "Security incidents must be reported immediately.",
+          "policy": "Security Incident Policy",
+          "tokens": {
+            "input": 2200,
+            "output": 19,
+            "total": 2219
+          },
+          "time_ms": 16296.9,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states that Security incidents must be reported immediately."
+        },
+        "llm_rag": {
+          "answer": "Security incidents must be reported immediately.",
+          "policy": "Security Incident Policy",
+          "tokens": {
+            "input": 178,
+            "output": 26,
+            "total": 204
+          },
+          "retrieved": [
+            {
+              "title": "Security Incident Policy",
+              "similarity": 0.628
+            },
+            {
+              "title": "Internet Usage Policy",
+              "similarity": 0.593
+            },
+            {
+              "title": "Cybersecurity Awareness Policy",
+              "similarity": 0.591
+            }
+          ],
+          "time_ms": 3718.2,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states that security incidents must be reported immediately."
+        }
+      }
+    },
+    {
+      "question": "A journalist emailed me asking about our new product. Can I reply?",
+      "expected_policy": "Media Contact Policy",
+      "type": "paraphrased",
+      "results": {
+        "rules": {
+          "answer": "All employees must use the approved email signature format.",
+          "policy": "Email Signature Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.6,
+          "policy_correct": false,
+          "supported": false,
+          "judge_reason": "The answer discusses email signatures, which does not address whether an employee can reply to a journalist."
+        },
+        "llm_full": {
+          "answer": "Only authorized employees may speak to the media. You must direct the journalist to the appropriate authorized personnel.",
+          "policy": "Media Contact Policy",
+          "tokens": {
+            "input": 2201,
+            "output": 39,
+            "total": 2240
+          },
+          "time_ms": 5849.0,
+          "policy_correct": true,
+          "supported": false,
+          "judge_reason": "The policy database states only authorized employees may speak to the media, but it does not state that you must direct the journalist to appropriate personnel."
+        },
+        "llm_rag": {
+          "answer": "Only authorized employees may speak to the media.",
+          "policy": "Media Contact Policy",
+          "tokens": {
+            "input": 174,
+            "output": 21,
+            "total": 195
+          },
+          "retrieved": [
+            {
+              "title": "Media Contact Policy",
+              "similarity": 0.664
+            },
+            {
+              "title": "Press Release Policy",
+              "similarity": 0.645
+            },
+            {
+              "title": "Public Speaking Policy",
+              "similarity": 0.632
+            }
+          ],
+          "time_ms": 5802.5,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The answer directly matches the Media Contact Policy in the database."
+        }
+      }
+    },
+    {
+      "question": "When do I need to hand in receipts after a business trip?",
+      "expected_policy": "Travel Reimbursement Policy",
+      "type": "direct",
+      "results": {
+        "rules": {
+          "answer": "Employees must submit receipts for travel expenses within 30 days.",
+          "policy": "Travel Reimbursement Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.7,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The policy database states that employees must submit receipts for travel expenses within 30 days."
+        },
+        "llm_full": {
+          "answer": "Employees must submit receipts for travel expenses within 30 days.",
+          "policy": "Travel Reimbursement Policy",
+          "tokens": {
+            "input": 2200,
+            "output": 26,
+            "total": 2226
+          },
+          "time_ms": 10333.2,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The policy database states that employees must submit receipts for travel expenses within 30 days."
+        },
+        "llm_rag": {
+          "answer": "Employees must submit receipts for travel expenses within 30 days.",
+          "policy": "Travel Reimbursement Policy",
+          "tokens": {
+            "input": 186,
+            "output": 26,
+            "total": 212
+          },
+          "retrieved": [
+            {
+              "title": "Travel Reimbursement Policy",
+              "similarity": 0.735
+            },
+            {
+              "title": "Petty Cash Policy",
+              "similarity": 0.645
+            },
+            {
+              "title": "Training Reimbursement Policy",
+              "similarity": 0.641
+            }
+          ],
+          "time_ms": 3879.6,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The policy database states that employees must submit receipts for travel expenses within 30 days."
+        }
+      }
+    },
+    {
+      "question": "Can I install Spotify on my work laptop?",
+      "expected_policy": "Software Installation Policy",
+      "type": "paraphrased",
+      "results": {
+        "rules": {
+          "answer": "Company laptops must be used for business purposes only.",
+          "policy": "Laptop Usage Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.5,
+          "policy_correct": false,
+          "supported": true,
+          "judge_reason": "The answer directly reflects the Laptop Usage Policy in the database stating company laptops must be used for business purposes only."
+        },
+        "llm_full": {
+          "answer": "Only approved software may be installed on company devices.",
+          "policy": "Software Installation Policy",
+          "tokens": {
+            "input": 2196,
+            "output": 22,
+            "total": 2218
+          },
+          "time_ms": 7777.4,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The answer directly reflects the Software Installation Policy found in the database."
+        },
+        "llm_rag": {
+          "answer": "Only approved software may be installed on company devices.",
+          "policy": "Software Installation Policy",
+          "tokens": {
+            "input": 179,
+            "output": 29,
+            "total": 208
+          },
+          "retrieved": [
+            {
+              "title": "Software Installation Policy",
+              "similarity": 0.714
+            },
+            {
+              "title": "Laptop Usage Policy",
+              "similarity": 0.699
+            },
+            {
+              "title": "Internet Usage Policy",
+              "similarity": 0.671
+            }
+          ],
+          "time_ms": 10591.8,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The answer directly reflects the Software Installation Policy found in the database."
+        }
+      }
+    },
+    {
+      "question": "How many sick days do I get per year?",
+      "expected_policy": "Sick Leave Policy",
+      "type": "trap",
+      "note": "The policy says sick leave accrues monthly but gives no number. Any specific number is unsupported.",
+      "results": {
+        "rules": {
+          "answer": "Employees accrue sick leave monthly for personal or family illness.",
+          "policy": "Sick Leave Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.4,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database states that employees accrue sick leave monthly for personal or family illness."
+        },
+        "llm_full": {
+          "answer": "Employees accrue sick leave monthly for personal or family illness.",
+          "policy": "Sick Leave Policy",
+          "tokens": {
+            "input": 2197,
+            "output": 23,
+            "total": 2220
+          },
+          "time_ms": 20813.9,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The answer correctly quotes the policy database regarding sick leave accrual."
+        },
+        "llm_rag": {
+          "answer": "Employees accrue sick leave monthly for personal or family illness, but the exact number of days per year is not specified.",
+          "policy": "Sick Leave Policy",
+          "tokens": {
+            "input": 186,
+            "output": 35,
+            "total": 221
+          },
+          "retrieved": [
+            {
+              "title": "Sick Leave Policy",
+              "similarity": 0.7
+            },
+            {
+              "title": "Vacation Policy",
+              "similarity": 0.673
+            },
+            {
+              "title": "Bereavement Leave Policy",
+              "similarity": 0.651
+            }
+          ],
+          "time_ms": 5421.4,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The policy states that sick leave is accrued monthly, but does not specify the exact total number of days per year."
+        }
+      }
+    },
+    {
+      "question": "What is the maximum hotel price per night on business travel?",
+      "expected_policy": null,
+      "type": "trap",
+      "note": "No policy sets a hotel limit. The travel policy only covers receipts.",
+      "results": {
+        "rules": {
+          "answer": "Employees must submit receipts for travel expenses within 30 days.",
+          "policy": "Travel Reimbursement Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.8,
+          "policy_correct": false,
+          "supported": false,
+          "judge_reason": "The database does not state the maximum hotel price per night for business travel."
+        },
+        "llm_full": {
+          "answer": "The policy database does not cover it.",
+          "policy": null,
+          "tokens": {
+            "input": 2199,
+            "output": 18,
+            "total": 2217
+          },
+          "time_ms": 7548.3,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database does not contain any information about maximum hotel prices for business travel, and the answer correctly states that the database does not cover it."
+        },
+        "llm_rag": {
+          "answer": "The provided policy database does not cover the maximum hotel price per night on business travel.",
+          "policy": null,
+          "tokens": {
+            "input": 185,
+            "output": 34,
+            "total": 219
+          },
+          "retrieved": [
+            {
+              "title": "Travel Reimbursement Policy",
+              "similarity": 0.638
+            },
+            {
+              "title": "Expense Approval Policy",
+              "similarity": 0.634
+            },
+            {
+              "title": "Conference Attendance Policy",
+              "similarity": 0.625
+            }
+          ],
+          "time_ms": 11753.1,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The answer correctly states that the database does not cover the question regarding maximum hotel prices."
+        }
+      }
+    },
+    {
+      "question": "Can I bring my dog to the office?",
+      "expected_policy": null,
+      "type": "out_of_scope",
+      "results": {
+        "rules": {
+          "answer": "Employees may request ergonomic equipment for remote work.",
+          "policy": "Home Office Equipment Policy",
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.6,
+          "policy_correct": false,
+          "supported": false,
+          "judge_reason": "The database does not contain any information regarding bringing dogs to the office."
+        },
+        "llm_full": {
+          "answer": "The policy database does not cover it.",
+          "policy": null,
+          "tokens": {
+            "input": 2196,
+            "output": 18,
+            "total": 2214
+          },
+          "time_ms": 3667.2,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database does not contain any policy regarding bringing dogs to the office, so the answer correctly states the database does not cover the question."
+        },
+        "llm_rag": {
+          "answer": "The policy database does not cover it.",
+          "policy": null,
+          "tokens": {
+            "input": 175,
+            "output": 18,
+            "total": 193
+          },
+          "retrieved": [
+            {
+              "title": "Workplace Accommodation Policy",
+              "similarity": 0.678
+            },
+            {
+              "title": "Remote Work Policy",
+              "similarity": 0.668
+            },
+            {
+              "title": "Office Access Policy",
+              "similarity": 0.668
+            }
+          ],
+          "time_ms": 6537.8,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database does not contain any policy regarding bringing dogs to the office, so the assistant correctly stated that it is not covered."
+        }
+      }
+    },
+    {
+      "question": "What is the company's pension contribution?",
+      "expected_policy": null,
+      "type": "out_of_scope",
+      "results": {
+        "rules": {
+          "answer": "I couldn't find a policy that covers this question.",
+          "policy": null,
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.3,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database does not contain a pension contribution policy, and the answer correctly states that the database does not cover the question."
+        },
+        "llm_full": {
+          "answer": "The policy database does not cover it.",
+          "policy": null,
+          "tokens": {
+            "input": 2196,
+            "output": 18,
+            "total": 2214
+          },
+          "time_ms": 6245.8,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The answer correctly states that the database does not cover the question."
+        },
+        "llm_rag": {
+          "answer": "The policy database does not cover it.",
+          "policy": null,
+          "tokens": {
+            "input": 179,
+            "output": 18,
+            "total": 197
+          },
+          "retrieved": [
+            {
+              "title": "Vacation Policy",
+              "similarity": 0.608
+            },
+            {
+              "title": "Performance Review Policy",
+              "similarity": 0.6
+            },
+            {
+              "title": "Sick Leave Policy",
+              "similarity": 0.59
+            }
+          ],
+          "time_ms": 5742.3,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The answer correctly states that the database does not cover the question."
+        }
+      }
+    },
+    {
+      "question": "Is there free lunch in the canteen?",
+      "expected_policy": null,
+      "type": "out_of_scope",
+      "results": {
+        "rules": {
+          "answer": "I couldn't find a policy that covers this question.",
+          "policy": null,
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.4,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The answer correctly states that the database does not cover the question."
+        },
+        "llm_full": {
+          "answer": "The policy database does not cover it.",
+          "policy": null,
+          "tokens": {
+            "input": 2195,
+            "output": 18,
+            "total": 2213
+          },
+          "time_ms": 5972.3,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database does not contain any information about free lunch in the canteen, so the answer correctly states it is not covered."
+        },
+        "llm_rag": {
+          "answer": "The policy database does not cover it.",
+          "policy": null,
+          "tokens": {
+            "input": 181,
+            "output": 18,
+            "total": 199
+          },
+          "retrieved": [
+            {
+              "title": "Tuition Assistance Policy",
+              "similarity": 0.603
+            },
+            {
+              "title": "Vacation Policy",
+              "similarity": 0.601
+            },
+            {
+              "title": "Mentorship Program Policy",
+              "similarity": 0.594
+            }
+          ],
+          "time_ms": 9113.6,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database does not contain any information about free lunch in the canteen, so the answer correctly states it is not covered."
+        }
+      }
+    },
+    {
+      "question": "Can I smoke on the company premises?",
+      "expected_policy": null,
+      "type": "out_of_scope",
+      "results": {
+        "rules": {
+          "answer": "I couldn't find a policy that covers this question.",
+          "policy": null,
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "total": 0
+          },
+          "time_ms": 0.5,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database does not cover smoking on company premises, and the assistant correctly stated that it could not find a policy covering this question."
+        },
+        "llm_full": {
+          "answer": "The policy database does not cover it.",
+          "policy": null,
+          "tokens": {
+            "input": 2195,
+            "output": 18,
+            "total": 2213
+          },
+          "time_ms": 8690.1,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database does not contain a smoking policy, so the answer correctly states that the database does not cover the question."
+        },
+        "llm_rag": {
+          "answer": "The policy database does not cover it.",
+          "policy": null,
+          "tokens": {
+            "input": 172,
+            "output": 25,
+            "total": 197
+          },
+          "retrieved": [
+            {
+              "title": "Anti-Harassment Policy",
+              "similarity": 0.63
+            },
+            {
+              "title": "Workplace Cleanliness Policy",
+              "similarity": 0.629
+            },
+            {
+              "title": "Parking Policy",
+              "similarity": 0.629
+            }
+          ],
+          "time_ms": 6441.3,
+          "policy_correct": true,
+          "supported": true,
+          "judge_reason": "The database does not contain any information about smoking on company premises, so the answer correctly states that it is not covered."
+        }
+      }
+    }
+  ]
+}

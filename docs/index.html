@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Company Policy Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f5f1; --panel: #ffffff; --ink: #1c1b19; --muted: #6b6860; --line: #e4e1d8;
+    --rules: #b4561b; --full: #2f5fa7; --rag: #1f7a55;
+    --good: #1f7a55; --good-bg: #e3f2ea; --bad: #b3261e; --bad-bg: #fbe6e4; --na-bg: #eeece6;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.6 Inter, system-ui, sans-serif; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 16px 64px; }
+  header .eyebrow { font: 500 12px/1 "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin: 10px 0 8px; letter-spacing: -.02em; }
+  header p.lede { color: var(--muted); max-width: 680px; margin: 0; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 44px 0 14px; font-weight: 600; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; }
+  .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 8px; vertical-align: 0; }
+  .table-scroll { overflow-x: auto; }
+  .analysis p { max-width: 760px; margin: 0 0 14px; font-size: 16px; }
+  .picker { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .picker button { font: inherit; font-size: 13px; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); cursor: pointer; color: var(--ink); text-align: left; }
+  .picker button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .picker button .tag { font: 500 10px "JetBrains Mono", monospace; text-transform: uppercase; opacity: .6; margin-left: 6px; }
+  .qhead { padding: 18px 20px; border-bottom: 1px solid var(--line); }
+  .qhead .q { font-size: 18px; font-weight: 600; }
+  .qhead .meta { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .cols { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .col { padding: 18px 20px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; }
+  .col:last-child { border-right: 0; }
+  .col h3 { margin: 0; font-size: 14px; display: flex; align-items: center; }
+  .answer { font-size: 15px; }
+  .kv { font-size: 13px; color: var(--muted); }
+  .kv b { color: var(--ink); font-weight: 600; }
+  .stats { display: flex; gap: 16px; font: 500 12px "JetBrains Mono", monospace; color: var(--muted); }
+  .badge { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 6px; }
+  .badge.good { background: var(--good-bg); color: var(--good); }
+  .badge.bad { background: var(--bad-bg); color: var(--bad); }
+  .badge.na { background: var(--na-bg); color: var(--muted); }
+  .reason { font-size: 12px; color: var(--muted); }
+  .retrieved { font-size: 12px; color: var(--muted); margin: 0; padding-left: 18px; }
+  .empty { color: var(--muted); font-style: italic; }
+  footer { margin-top: 48px; font-size: 13px; color: var(--muted); }
+  footer dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; margin: 0 0 12px; }
+  footer dt { font-weight: 600; color: var(--ink); }
+  footer dd { margin: 0; }
+  a { color: var(--full); }
+  @media (max-width: 820px) {
+    .cols { grid-template-columns: 1fr; }
+    .col { border-right: 0; border-bottom: 1px solid var(--line); }
+    .col:last-child { border-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">AI in Business 2026 · SDU · Vishal</div>
+    <h1>Company Policy Assistant</h1>
+    <p class="lede">The same questions about a 98-policy database, answered three ways: rules-based keyword search, an LLM that reads every policy, and an LLM that first looks up the closest policies in a vector index.</p>
+  </header>
+
+  <h2>Results at a glance</h2>
+  <div class="panel table-scroll">
+    <table id="summary">
+      <thead><tr>
+        <th>Approach</th><th>Avg. response time</th><th>Avg. tokens / question</th>
+        <th>Correct policy identified</th><th>Unsupported answers</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <h2>Comparison and preferred approach</h2>
+  <section class="analysis" id="analysis">
+    <p>All three approaches were tested on the same 18 questions about a database of 98 company policies: 12 ordinary questions (half of them worded differently from the policy text), 2 trap questions where the policy lacks the detail being asked for, and 4 questions no policy covers. Rules-based keyword search answers instantly (under 1 ms) and costs no tokens, but it identified the right policy only 61% of the time. Whenever a question used different words from the policy, for example "my grandmother passed away" instead of "bereavement", it returned an unrelated policy, so a third of its answers were not supported by the database. Because it quotes policy text word for word, it never invents facts, but it confidently gives irrelevant ones. Both LLM approaches identified the correct policy for all 18 questions and correctly said "not covered" for every out-of-scope question. The LLM without a vector index reads all 98 policies for every question, which cost about 2,200 tokens and 8.7 seconds per answer, and in 2 of 18 answers (11%) it added advice the policies do not contain, such as telling the user to forward a journalist to "authorized personnel".</p>
+    <p>The LLM with a vector index is the preferred approach. It first retrieves the three policies closest in meaning to the question and sends only those to the model, so it used about 207 tokens per question (around 11 times fewer than sending the whole database), answered faster on average (6.8 seconds), matched the full-context LLM's 100% policy accuracy, and produced no unsupported answers. Giving the model less but more relevant text appears to leave it less room to embellish: on the sick-leave trap question it was the only approach to state explicitly that the policy gives no number of days. The cost savings also grow with the database, since the full-context approach must send every policy with every question while the indexed approach always sends three. The main caveats are that 18 questions is a small test set, response times on Gemini's free tier vary with rate limiting, and the hallucination check relies on an LLM judge. Within those limits, the vector-index approach gives the best balance of accuracy, honesty and cost, and it is the approach used by the Slack bot.</p>
+  </section>
+
+  <h2>Every question, side by side</h2>
+  <div class="picker" id="picker" role="toolbar" aria-label="Choose a test question"></div>
+  <div class="panel" id="detail"></div>
+
+  <footer>
+    <dl>
+      <dt>Models</dt><dd id="models">–</dd>
+      <dt>Run</dt><dd id="run">–</dd>
+      <dt>Unsupported</dt><dd>An answer is flagged when a separate LLM judge, given the full policy database, finds a claim the database does not state (for example a made-up number), or an answer to a question the database does not cover.</dd>
+      <dt>Tokens</dt><dd>Gemini input + output tokens for answering. Judge calls and the small embedding calls are not included.</dd>
+      <dt>Code</dt><dd><a href="https://github.com/Vishal188l/Company-policy-assistant">github.com/Vishal188l/Company-policy-assistant</a></dd>
+    </dl>
+  </footer>
+</div>
+
+<script>
+const ENGINES = [
+  { key: "rules", label: "Rules-based search", color: "var(--rules)" },
+  { key: "llm_full", label: "LLM without vector index", color: "var(--full)" },
+  { key: "llm_rag", label: "LLM with vector index", color: "var(--rag)" },
+];
+const TYPE_LABEL = { direct: "direct", paraphrased: "paraphrased", trap: "trap", out_of_scope: "not covered" };
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const ms = v => v < 1 ? "< 1 ms" : v < 1000 ? `${Math.round(v)} ms` : `${(v / 1000).toFixed(2)} s`;
+const pct = v => v == null ? "–" : `${Math.round(v * 100)}%`;
+
+fetch("results.json").then(r => r.json()).then(render).catch(() => {
+  document.getElementById("detail").innerHTML = '<p class="empty" style="padding:20px">results.json could not be loaded.</p>';
+});
+
+function render(data) {
+  const tbody = document.querySelector("#summary tbody");
+  tbody.innerHTML = ENGINES.map(e => {
+    const s = data.summary[e.key];
+    if (!s) return `<tr><td><span class="swatch" style="background:${e.color}"></span>${e.label}</td><td colspan="4" class="empty">not run yet</td></tr>`;
+    return `<tr><td><span class="swatch" style="background:${e.color}"></span>${e.label}</td>
+      <td class="num">${ms(s.avg_time_ms)}</td><td class="num">${s.avg_tokens.toLocaleString()}</td>
+      <td class="num">${pct(s.policy_accuracy)}</td><td class="num">${pct(s.unsupported_rate)}</td></tr>`;
+  }).join("");
+
+  document.getElementById("models").textContent = `${data.chat_model} (answers and judge), ${data.embed_model} (vector index)`;
+  document.getElementById("run").textContent = `${data.questions.length} test questions, ${data.policy_count} policies, ${new Date(data.generated_at).toLocaleString()}`;
+
+  const picker = document.getElementById("picker");
+  picker.innerHTML = data.questions.map((q, i) =>
+    `<button data-i="${i}" aria-pressed="${i === 0}">${esc(q.question)}<span class="tag">${TYPE_LABEL[q.type] || q.type}</span></button>`
+  ).join("");
+  picker.addEventListener("click", ev => {
+    const b = ev.target.closest("button"); if (!b) return;
+    picker.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    showQuestion(data.questions[+b.dataset.i]);
+  });
+  showQuestion(data.questions[0]);
+}
+
+function showQuestion(q) {
+  const expected = q.expected_policy ? `Expected policy: <b>${esc(q.expected_policy)}</b>` : "Expected: <b>not covered by any policy</b>";
+  const note = q.note ? ` · ${esc(q.note)}` : "";
+  const cols = ENGINES.map(e => {
+    const r = q.results[e.key];
+    if (!r) return `<div class="col"><h3><span class="swatch" style="background:${e.color}"></span>${e.label}</h3><p class="empty">Not run yet.</p></div>`;
+    const pol = r.policy ? esc(r.policy) : "none";
+    const polBadge = r.policy_correct ? '<span class="badge good">correct policy</span>' : '<span class="badge bad">wrong policy</span>';
+    const sup = r.supported === true ? '<span class="badge good">supported</span>'
+      : r.supported === false ? '<span class="badge bad">unsupported</span>' : '<span class="badge na">not judged</span>';
+    const retrieved = r.retrieved ? `<div class="kv">Retrieved from index:</div><ol class="retrieved">${r.retrieved.map(x => `<li>${esc(x.title)} (${x.similarity})</li>`).join("")}</ol>` : "";
+    return `<div class="col">
+      <h3><span class="swatch" style="background:${e.color}"></span>${e.label}</h3>
+      <div class="answer">${esc(r.answer)}</div>
+      <div class="kv">Policy: <b>${pol}</b></div>
+      <div>${polBadge} ${sup}</div>
+      ${r.judge_reason && r.supported !== null ? `<div class="reason">${esc(r.judge_reason)}</div>` : ""}
+      ${retrieved}
+      <div class="stats"><span>${ms(r.time_ms)}</span><span>${r.tokens.total.toLocaleString()} tokens</span></div>
+    </div>`;
+  }).join("");
+  document.getElementById("detail").innerHTML =
+    `<div class="qhead"><div class="q">${esc(q.question)}</div><div class="meta">${expected}${note}</div></div><div class="cols">${cols}</div>`;
+}
+</script>
+</body>
+</html>

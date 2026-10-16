@@ -1,0 +1,31 @@
+display_information:
+  name: PolicyBot
+  description: Answers company policy questions and names the relevant policy.
+  background_color: "#1f7a55"
+features:
+  app_home:
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false
+  bot_user:
+    display_name: PolicyBot
+    always_online: true
+  slash_commands:
+    - command: /policy
+      description: Ask a company policy question
+      usage_hint: how many vacation days do I get?
+      should_escape: false
+oauth_config:
+  scopes:
+    bot:
+      - app_mentions:read
+      - chat:write
+      - commands
+      - im:history
+settings:
+  event_subscriptions:
+    bot_events:
+      - app_mention
+      - message.im
+  interactivity:
+    is_enabled: true
+  socket_mode_enabled: true
